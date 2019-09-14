@@ -1,0 +1,1 @@
+# cfn-rpdk-schema-lint
