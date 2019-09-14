@@ -1,0 +1,67 @@
+{
+	"name": "cfn-rpdk-schema-lint",
+	"displayName": "CloudFormation RPDK Schema Linter",
+	"description": "Assists your development of an AWS CloudFormation Resource Type JSON schema",
+	"author": {
+		"name": "Ian Mckay",
+		"email": "rpdk-ext@ian.mn"
+	},	
+	"version": "0.1.0",
+	"publisher": "iann0036",
+	"icon": "resources/logo_128.png",
+	"engines": {
+		"vscode": "^1.38.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"maintainers": [
+		"Ian Mckay <rpdk-ext@ian.mn>"
+	],
+	"contributors": [
+		"Ian Mckay <rpdk-ext@ian.mn>"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/iann0036/cfn-rpdk-schema-lint.git"
+	},
+	"bugs": {
+		"url": "https://github.com/iann0036/cfn-rpdk-schema-lints/issues"
+	},
+	"keywords": [
+		"AWS",
+		"CloudFormation",
+		"rpdk"
+	],
+	"activationEvents": [
+		"onLanguage:json"
+	],
+	"galleryBanner": {
+		"color": "#353535",
+		"theme": "dark"
+	},
+	"main": "./out/extension.js",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runTest.js"
+	},
+	"dependencies": {
+		"ajv": "^6.10.2",
+		"json-schema-ref-parser": "^3.3.1",
+		"json-source-map": "^0.6.1"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.38.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4",
+		"typescript": "^3.3.1",
+		"tslint": "^5.12.1",
+		"vscode-test": "^1.2.0"
+	}
+}
