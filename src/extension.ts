@@ -23,7 +23,7 @@ export class RDPKSchemaActionProvider implements vscode.CodeActionProvider {
 
 	provideCodeActions(document: vscode.TextDocument, range: vscode.Range | vscode.Selection, context: vscode.CodeActionContext, token: vscode.CancellationToken): vscode.CodeAction[] {
 		return context.diagnostics
-			.filter(diagnostic => diagnostic.code === "rpdk_schema_diagnostic")
+			.filter(diagnostic => diagnostic.code === "rpdk_schema")
 			.map(diagnostic => this.createCommandCodeAction(diagnostic));
 	}
 

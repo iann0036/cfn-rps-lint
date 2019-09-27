@@ -24,7 +24,7 @@ export function refreshDiagnostics(doc: vscode.TextDocument, rpdkSchemaDiagnosti
                     if (range) {
                         let diagnostic = new vscode.Diagnostic(range, validationErr.dataPath.substring(1) + " " + validationErr.message,
                             vscode.DiagnosticSeverity.Error);
-                        diagnostic.code = "rpdk_schema_diagnostic";
+                        diagnostic.code = "rpdk_schema";
                         diagnostics.push(diagnostic);
                     }
                 });
@@ -91,7 +91,7 @@ function getRPDKSchema(doc: vscode.TextDocument) {
         if (fileName.match(/[a-z0-9]{2,64}\-[a-z0-9]{2,64}\-[a-z0-9]{2,64}\.json$/g)) {
             let jsonDoc = JSON.parse(doc.getText());
 
-            if ("typeName" in jsonDoc) {
+            if ("typeName" in jsonDoc || ("sourceUrl" in jsonDoc && "primaryIdentifier" in jsonDoc)) {
                 return jsonDoc;
             }
         }
