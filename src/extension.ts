@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 
-	const rpdkSchemaDiagnostics = vscode.languages.createDiagnosticCollection("rpdk-schema");
+	const rpdkSchemaDiagnostics = vscode.languages.createDiagnosticCollection("rp-schema");
 	context.subscriptions.push(rpdkSchemaDiagnostics);
 
 	subscribeToDocumentChanges(context, rpdkSchemaDiagnostics);
@@ -23,7 +23,7 @@ export class RDPKSchemaActionProvider implements vscode.CodeActionProvider {
 
 	provideCodeActions(document: vscode.TextDocument, range: vscode.Range | vscode.Selection, context: vscode.CodeActionContext, token: vscode.CancellationToken): vscode.CodeAction[] {
 		return context.diagnostics
-			.filter(diagnostic => diagnostic.code === "rpdk_schema")
+			.filter(diagnostic => diagnostic.code === "rp_schema")
 			.map(diagnostic => this.createCommandCodeAction(diagnostic));
 	}
 

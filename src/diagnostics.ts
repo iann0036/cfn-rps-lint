@@ -24,7 +24,7 @@ export function refreshDiagnostics(doc: vscode.TextDocument, rpdkSchemaDiagnosti
                     if (range) {
                         let diagnostic = new vscode.Diagnostic(range, validationErr.dataPath.substring(1) + " " + validationErr.message,
                             vscode.DiagnosticSeverity.Error);
-                        diagnostic.code = "rpdk_schema";
+                        diagnostic.code = "rp_schema";
                         diagnostics.push(diagnostic);
                     }
                 });

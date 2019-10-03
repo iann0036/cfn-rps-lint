@@ -1,10 +1,10 @@
 {
-	"name": "cfn-rpdk-schema-lint",
-	"displayName": "CloudFormation RPDK Schema Linter",
+	"name": "cfn-rps-lint",
+	"displayName": "CloudFormation Resource Provider Schema Linter",
 	"description": "Assists your development of an AWS CloudFormation Resource Type JSON schema",
 	"author": {
 		"name": "Ian Mckay",
-		"email": "rpdk-ext@ian.mn"
+		"email": "cfn-rps-ext@ian.mn"
 	},	
 	"version": "0.1.1",
 	"publisher": "iann0036",
@@ -16,10 +16,10 @@
 		"Other"
 	],
 	"maintainers": [
-		"Ian Mckay <rpdk-ext@ian.mn>"
+		"Ian Mckay <cfn-rps-ext@ian.mn>"
 	],
 	"contributors": [
-		"Ian Mckay <rpdk-ext@ian.mn>"
+		"Ian Mckay <cfn-rps-ext@ian.mn>"
 	],
 	"repository": {
 		"type": "git",
@@ -30,8 +30,7 @@
 	},
 	"keywords": [
 		"AWS",
-		"CloudFormation",
-		"rpdk"
+		"CloudFormation"
 	],
 	"activationEvents": [
 		"onLanguage:json"
