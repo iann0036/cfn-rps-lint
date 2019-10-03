@@ -6,7 +6,7 @@ function activate(context) {
     context.subscriptions.push(vscode.languages.registerCodeActionsProvider('json', new RDPKSchemaActionProvider(), {
         providedCodeActionKinds: RDPKSchemaActionProvider.providedCodeActionKinds
     }));
-    const rpdkSchemaDiagnostics = vscode.languages.createDiagnosticCollection("rpdk-schema");
+    const rpdkSchemaDiagnostics = vscode.languages.createDiagnosticCollection("rp-schema");
     context.subscriptions.push(rpdkSchemaDiagnostics);
     diagnostics_1.subscribeToDocumentChanges(context, rpdkSchemaDiagnostics);
 }
@@ -14,7 +14,7 @@ exports.activate = activate;
 class RDPKSchemaActionProvider {
     provideCodeActions(document, range, context, token) {
         return context.diagnostics
-            .filter(diagnostic => diagnostic.code === "rpdk_schema_diagnostic")
+            .filter(diagnostic => diagnostic.code === "rp_schema")
             .map(diagnostic => this.createCommandCodeAction(diagnostic));
     }
     createCommandCodeAction(diagnostic) {
