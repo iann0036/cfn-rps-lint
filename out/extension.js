@@ -24,10 +24,10 @@ class RDPKSchemaActionProvider {
         return action;
     }
 }
-exports.RDPKSchemaActionProvider = RDPKSchemaActionProvider;
 RDPKSchemaActionProvider.providedCodeActionKinds = [
     vscode.CodeActionKind.Empty
 ];
+exports.RDPKSchemaActionProvider = RDPKSchemaActionProvider;
 function deactivate() { }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map

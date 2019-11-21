@@ -1,11 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RPDK_SCHEMA = {
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "https://json-schema.org/draft-07/schema#",
     "$id": "provider.definition.schema.v1.json",
     "title": "CloudFormation Resource Provider Definition MetaSchema",
     "description": "This schema validates a CloudFormation resource provider definition.",
     "definitions": {
+        "httpsUrl": {
+            "type": "string",
+            "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
+            "maxLength": 4096
+        },
         "handlerDefinition": {
             "description": "Defines any execution operations which can be performed on this resource provider",
             "type": "object",
@@ -15,11 +20,10 @@ exports.RPDK_SCHEMA = {
                     "items": {
                         "type": "string"
                     },
-                    "minItems": 1,
                     "additionalItems": false
                 }
             },
-            "additionalItems": false,
+            "additionalProperties": false,
             "required": [
                 "permissions"
             ]
@@ -74,15 +78,7 @@ exports.RPDK_SCHEMA = {
                         "insertionOrder": {
                             "description": "When set to true, this flag indicates that the order of insertion of the array will be honored, and that changing the order of the array would indicate a diff",
                             "type": "boolean",
-                            "default": false
-                        },
-                        "readOnly": {
-                            "description": "A list of properties that are able to be found in a Read request but unable to be specified by the customer",
-                            "$ref": "https://json-schema.org/draft-07/schema#/definitions/stringArray"
-                        },
-                        "writeOnly": {
-                            "description": "A list of properties (typically sensitive) that are able to be specified by the customer but unable to be returned in a Read request",
-                            "$ref": "https://json-schema.org/draft-07/schema#/definitions/stringArray"
+                            "default": true
                         },
                         "$ref": {
                             "$ref": "https://json-schema.org/draft-07/schema#/properties/$ref"
@@ -217,6 +213,14 @@ exports.RPDK_SCHEMA = {
     },
     "type": "object",
     "properties": {
+        "$schema": {
+            "$ref": "https://json-schema.org/draft-07/schema#/properties/$schema"
+        },
+        "type": {
+            "$comment": "Resource Type",
+            "type": "string",
+            "const": "RESOURCE"
+        },
         "typeName": {
             "$comment": "Resource Type Identifier",
             "examples": [
@@ -242,14 +246,14 @@ exports.RPDK_SCHEMA = {
             "examples": [
                 "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-s3"
             ],
-            "type": "string"
+            "$ref": "#/definitions/httpsUrl"
         },
         "documentationUrl": {
             "$comment": "A page with supplemental documentation. The property documentation in schemas should be able to stand alone, but this is an opportunity for e.g. rich examples or more guided documents.",
             "examples": [
                 "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/CHAP_Using.html"
             ],
-            "type": "string"
+            "$ref": "#/definitions/httpsUrl"
         },
         "additionalProperties": {
             "$comment": "All properties of a resource must be expressed in the schema - arbitrary inputs are not allowed",
@@ -365,7 +369,8 @@ exports.RPDK_SCHEMA = {
         "typeName",
         "properties",
         "description",
-        "primaryIdentifier"
+        "primaryIdentifier",
+        "additionalProperties"
     ],
     "additionalProperties": false
 };
