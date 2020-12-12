@@ -7,7 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          curl https://raw.githubusercontent.com/aws-cloudformation/aws-cloudformation-resource-schema/master/src/main/resources/schema/provider.definition.schema.v1.json > src/schema.ts
+          echo 'export var RPDK_SCHEMA = ' > src/schema.ts
+          curl https://raw.githubusercontent.com/aws-cloudformation/aws-cloudformation-resource-schema/master/src/main/resources/schema/provider.definition.schema.v1.json >> src/schema.ts
       - uses: peter-evans/create-pull-request@v3
         with:
           commit-message: |
