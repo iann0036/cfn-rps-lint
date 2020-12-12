@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RPDK_SCHEMA = {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "provider.definition.schema.v1.json",
+    "$id": "https://schema.cloudformation.us-east-1.amazonaws.com/provider.definition.schema.v1.json",
     "title": "CloudFormation Resource Provider Definition MetaSchema",
     "description": "This schema validates a CloudFormation resource provider definition.",
     "definitions": {
@@ -21,6 +21,13 @@ exports.RPDK_SCHEMA = {
                         "type": "string"
                     },
                     "additionalItems": false
+                },
+                "timeoutInMinutes": {
+                    "description": "Defines the timeout for the entire operation to be interpreted by the invoker of the handler.  The default is 120 (2 hours).",
+                    "type": "integer",
+                    "minimum": 2,
+                    "maximum": 2160,
+                    "default": 120
                 }
             },
             "additionalProperties": false,
@@ -65,6 +72,15 @@ exports.RPDK_SCHEMA = {
                     }
                 }
             }
+        },
+        "replacementStrategy": {
+            "type": "string",
+            "description": "The valid replacement strategies are [create_then_delete] and [delete_then_create]. All other inputs are invalid.",
+            "default": "create_then_delete",
+            "enum": [
+                "create_then_delete",
+                "delete_then_create"
+            ]
         },
         "properties": {
             "allOf": [
@@ -209,9 +225,41 @@ exports.RPDK_SCHEMA = {
                     "additionalProperties": false
                 }
             ]
+        },
+        "resourceLink": {
+            "type": "object",
+            "properties": {
+                "$comment": {
+                    "$ref": "http://json-schema.org/draft-07/schema#/properties/$comment"
+                },
+                "templateUri": {
+                    "type": "string",
+                    "pattern": "^(/|https:)"
+                },
+                "mappings": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^[A-Za-z0-9]{1,64}$": {
+                            "type": "string",
+                            "format": "json-pointer"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "templateUri",
+                "mappings"
+            ],
+            "additionalProperties": false
         }
     },
     "type": "object",
+    "patternProperties": {
+        "^\\$id$": {
+            "$ref": "http://json-schema.org/draft-07/schema#/properties/$id"
+        }
+    },
     "properties": {
         "$schema": {
             "$ref": "http://json-schema.org/draft-07/schema#/properties/$schema"
@@ -254,6 +302,10 @@ exports.RPDK_SCHEMA = {
                 "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/CHAP_Using.html"
             ],
             "$ref": "#/definitions/httpsUrl"
+        },
+        "replacementStrategy": {
+            "$comment": "The order of replacement for an immutable resource update.",
+            "$ref": "#/definitions/replacementStrategy"
         },
         "additionalProperties": {
             "$comment": "All properties of a resource must be expressed in the schema - arbitrary inputs are not allowed",
@@ -363,6 +415,10 @@ exports.RPDK_SCHEMA = {
         },
         "oneOf": {
             "$ref": "#/definitions/schemaArray"
+        },
+        "resourceLink": {
+            "description": "A template-able link to a resource instance. AWS-internal service links must be relative to the AWS console domain. External service links must be absolute, HTTPS URIs.",
+            "$ref": "#/definitions/resourceLink"
         }
     },
     "required": [
