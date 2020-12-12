@@ -24,7 +24,7 @@ export var RPDK_SCHEMA = {
                     "description": "Defines the timeout for the entire operation to be interpreted by the invoker of the handler.  The default is 120 (2 hours).",
                     "type": "integer",
                     "minimum": 2,
-                    "maximum": 720,
+                    "maximum": 2160,
                     "default": 120
                 }
             },
@@ -70,6 +70,15 @@ export var RPDK_SCHEMA = {
                     }
                 }
             }
+        },
+        "replacementStrategy": {
+            "type": "string",
+            "description": "The valid replacement strategies are [create_then_delete] and [delete_then_create]. All other inputs are invalid.",
+            "default": "create_then_delete",
+            "enum": [
+                "create_then_delete",
+                "delete_then_create"
+            ]
         },
         "properties": {
             "allOf": [
@@ -292,6 +301,10 @@ export var RPDK_SCHEMA = {
             ],
             "$ref": "#/definitions/httpsUrl"
         },
+        "replacementStrategy": {
+            "$comment": "The order of replacement for an immutable resource update.",
+            "$ref": "#/definitions/replacementStrategy"
+        },
         "additionalProperties": {
             "$comment": "All properties of a resource must be expressed in the schema - arbitrary inputs are not allowed",
             "type": "boolean",
@@ -414,4 +427,4 @@ export var RPDK_SCHEMA = {
         "additionalProperties"
     ],
     "additionalProperties": false
-};
+}
