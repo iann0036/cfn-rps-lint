@@ -303,6 +303,11 @@ exports.RPDK_SCHEMA = {
             ],
             "$ref": "#/definitions/httpsUrl"
         },
+        "taggable": {
+            "$comment": "A boolean flag indicating whether this resource type supports updatable tagging.",
+            "type": "boolean",
+            "default": "true"
+        },
         "replacementStrategy": {
             "$comment": "The order of replacement for an immutable resource update.",
             "$ref": "#/definitions/replacementStrategy"
