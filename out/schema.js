@@ -306,7 +306,7 @@ exports.RPDK_SCHEMA = {
         "taggable": {
             "$comment": "A boolean flag indicating whether this resource type supports updatable tagging.",
             "type": "boolean",
-            "default": "true"
+            "default": true
         },
         "replacementStrategy": {
             "$comment": "The order of replacement for an immutable resource update.",
@@ -424,6 +424,14 @@ exports.RPDK_SCHEMA = {
         "resourceLink": {
             "description": "A template-able link to a resource instance. AWS-internal service links must be relative to the AWS console domain. External service links must be absolute, HTTPS URIs.",
             "$ref": "#/definitions/resourceLink"
+        },
+        "propertyTransform": {
+            "type": "object",
+            "patternProperties": {
+                "^[A-Za-z0-9]{1,64}$": {
+                    "type": "string"
+                }
+            }
         }
     },
     "required": [
